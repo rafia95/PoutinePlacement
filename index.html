@@ -16,14 +16,30 @@
     <div id="map"></div>
 		<script>
 			function initMap() {
+		
 			var mtl = {lat: 45.5016889, lng: -73.567256};
-			var angrignon = {lat: 45.4462127, lng: -73.6058374};
 			
-			var drivein = {lat: 45.4151005, lng: -73.6237601};
 			var map = new google.maps.Map(document.getElementById('map'), {zoom: 12, center: mtl});
 			var marker = new google.maps.Marker({position: mtl, map: map});
-			var marker2 = new google.maps.Marker({position: angrignon, map: map});
-			var marker3 = new google.maps.Marker({position: drivein, map: map});
+		
+			
+			var script = document.createElement('script');
+    
+			script.src = 'data.js';
+			document.getElementsByTagName('head')[0].appendChild(script);
+			
+			window.data_callback = function(results) {
+			alert('js file called' + results.places.length);
+        for (var i = 0; i < results.length; i++) {
+          var coords = results.places[i];
+		  alert("hi",results.places.length);
+          var latLng = new google.maps.LatLng(coords[0],coords[1]);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+        }
+      }
 			}
 		</script>
 	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLNwvThGP5Pzl8DqukUL2-c2GcGisNSp8&callback=initMap">
