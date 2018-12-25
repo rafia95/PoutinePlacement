@@ -1,49 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      #map {
-        width: 70%;
-        height: 700px;
-        background-color: orange;
-      }
-    </style>
-  </head>
+	<head>
+    <link rel="stylesheet" href="stylesheet.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="mymaps.js"></script>
+	</head>
   <body>
-    <h3>My Google Maps Demo</h3>
-	<p><h3>Here are the few famous poutine places in montreal:</h3></p>
+    <h3>My Google Maps </h3>
+	<p><h3>Places I Like And Recommend:</h3></p>
     <!--The div element for the map -->
     <div id="map"></div>
-		<script>
-			function initMap() {
-		
-			var mtl = {lat: 45.5016889, lng: -73.567256};
-			
-			var map = new google.maps.Map(document.getElementById('map'), {zoom: 12, center: mtl});
-			var marker = new google.maps.Marker({position: mtl, map: map});
-		
-			
-			var script = document.createElement('script');
-    
-			script.src = 'data.js';
-			document.getElementsByTagName('head')[0].appendChild(script);
-			
-			window.data_callback = function(results) {
-			alert('js file called' + results.places.length);
-        for (var i = 0; i < results.length; i++) {
-          var coords = results.places[i];
-		  alert("hi",results.places.length);
-          var latLng = new google.maps.LatLng(coords[0],coords[1]);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
-        }
-      }
-			}
-		</script>
-	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLNwvThGP5Pzl8DqukUL2-c2GcGisNSp8&callback=initMap">
-    </script>
+	<div id="information_holder"></div>	
+	 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLNwvThGP5Pzl8DqukUL2-c2GcGisNSp8&libraries=places&callback=callPlaces"></script>
   </body>
 </html>
 
